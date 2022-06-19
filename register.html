@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Luckiest+Guy&family=Nunito:wght@700&family=Permanent+Marker&family=Roboto:ital,wght@0,100;0,400;1,300&display=swap"
+ rel="stylesheet">
+ <link rel="stylesheet" href="sweetalert2.min.css">
+
+    <title>Login - SistemaWeb</title>
+</head>
+<body>
+    <form>
+        <div class="logo">
+            <img src="https://th.bing.com/th/id/R.e6ad18c4b275955d0759b56250525de2?rik=nnEk%2bbzTThlGdQ&pid=ImgRaw&r=0">
+        </div>
+        <h1 class="meuBuzu">Meu Buzú</h1>
+        <div>
+            <div><label>Name</label></div>
+               <input type="text" name="name"placeholder="Name" id="name">
+      </div>
+      <div>
+      <div>
+            <div><label>Email</label></div>
+               <input type="email" name="email"placeholder="seuemail@email.com.br" id="email">
+      </div>
+      <div>
+        <div><label>Password</label></div>
+           <input type="password" name="password"placeholder="*********" id="password">
+  </div>
+        <br/>
+        <div>
+            <button type="button" class="solid" id="signup">Register</button>
+        </div>
+        <div>
+            <a class="outline" href="./login.html" >SigIn</a>
+        </div>
+      </div>
+    </form>
+    <script src="./javascript/main.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.3/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.8.3/firebase-analytics.js";
+        import {getAuth,createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.8.3/firebase-auth.js";
+
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyAYqwvQu7TR60A4h3C_hBiv4ORMiXKdyzQ",
+          authDomain: "autenticacaofirebase-fe3aa.firebaseapp.com",
+          databaseURL: "https://autenticacaofirebase-fe3aa-default-rtdb.firebaseio.com",
+          projectId: "autenticacaofirebase-fe3aa",
+          storageBucket: "autenticacaofirebase-fe3aa.appspot.com",
+          messagingSenderId: "804418881617",
+          appId: "1:804418881617:web:2512ffa750eee267eb1070",
+          measurementId: "G-QCZ7632KM5"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+                const auth = getAuth(app);
+
+
+                document.getElementById('signup').addEventListener('click',function(){
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+
+                            createUserWithEmailAndPassword(auth,email,password).then((userCredential)=>{
+                                const user = userCredential.user;
+                                Swal.fire({
+                                     position: 'center',
+                                        icon: 'success',
+                                        title: 'user created !',
+                                         showConfirmButton: false,
+                                            timer: 1500
+                                            })
+                                            
+                            })
+                            .catch((error)=>{
+                                    const errorCode = error.code;
+                                    const errorMessage = error.message;
+
+                            });
+
+                })
+      </script>
+    
+</body>
+</html>
