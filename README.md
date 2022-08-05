@@ -1,2 +1,1 @@
-# BUS-system
- System of Bus travel
+Sistema desenvolvido em javascript e firebase 
